@@ -1,10 +1,10 @@
 PROGRAM = cxx-util
-CC = gcc
+CC = g++
 CFLAGS = -Wall 
-LINK = gcc
+LINK = g++
 #LDFLAGS = 
 
-SRC_FILE_TYPE = c
+SRC_FILE_TYPE = cxx
 SRC_DIR := src
 
 #define main source file in which "main()" function exist!
