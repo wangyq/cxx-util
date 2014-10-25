@@ -1,2 +1,2 @@
 
-int is_bigendian();
+bool is_bigendian();

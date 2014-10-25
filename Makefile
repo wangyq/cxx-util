@@ -32,7 +32,7 @@ BUILD_MODE := debug
 #==================================================
 #add the lib you used here
 #LIBS := -lLib1 -lLib2 -lLib3
-LIBS := -lpthread
+LIBS := -lpthread -lm
 #LIBS := -lpthread -lxml2
 #LIB_PATH := -Lpath1 -Lpath2 -Lpath3
 #LIB_PATH := 
