@@ -16,7 +16,7 @@ bool is_bigendian()
 		}u;
 		u.val = 1;
 	
-		_isBigEndian = (u.ch != 1);
+		_isBigEndian = (u.ch != 1); //caution: no locking here, vialation maybe occur.
 		
 		bInit = true;  //must place it here!
 	}
