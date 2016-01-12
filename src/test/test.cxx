@@ -11,6 +11,8 @@
 #include "util.h"
 #include "Stack.h"
 #include "ArrayQueue.h"
+#include "BinTree.h"
+
 
 using namespace std;
 
@@ -40,8 +42,30 @@ void test_queue() {
 	}
 	cout << endl;
 }
+
+void printInt(const int& val){
+	cout<<val<<" ";
+}
+void test_bintree(){
+	BinTree<int> tree;
+	int val[] = {1,2,0,0,3,4,0,5};
+	tree.createPreOrder(val,sizeof(val)/sizeof(int), 0);
+
+	cout<<"InOrder: ";
+	tree.printInOrder(printInt); cout<<endl;
+	cout<<"PreOrder: ";
+	tree.printPreOrder(printInt); cout<<endl;
+	cout<<"PostOrder: ";
+	tree.printPostOrder(printInt); cout<<endl;
+
+}
+
+/**
+ * test run entry
+ */
 void test_run() {
 	test_endian();
-	test_stack();
-	test_queue();
+	//test_stack();
+	//test_queue();
+	test_bintree();
 }
