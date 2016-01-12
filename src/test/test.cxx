@@ -36,6 +36,8 @@ void test_queue() {
 	ArrayQueue<int> queue;
 	for (int i = 10; i < 100; i++) {
 		queue.EnQueue(i);
+		queue.EnQueue(i+1);
+		queue.Dequeue();
 	}
 	while (!queue.isEmpty()) {
 		cout << queue.Dequeue() << ",";
@@ -66,6 +68,6 @@ void test_bintree(){
 void test_run() {
 	test_endian();
 	//test_stack();
-	//test_queue();
+	test_queue();
 	test_bintree();
 }

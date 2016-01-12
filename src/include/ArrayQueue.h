@@ -105,6 +105,9 @@ bool ArrayQueue<T>::isFull() {
 }
 
 //===================
+/**
+ * The element that Dequeue first!
+ */
 template<class T>
 T& ArrayQueue<T>::Head() {
 	// TODO Auto-generated destructor stub
@@ -113,6 +116,9 @@ T& ArrayQueue<T>::Head() {
 	return m_pData[m_iHead];
 }
 
+/**
+ * The element that Dequeue last!
+ */
 template<class T>
 T& ArrayQueue<T>::Tail() {
 	// TODO Auto-generated destructor stub
@@ -157,7 +163,7 @@ bool ArrayQueue<T>::EnQueue(const T& ele) {
 			for (i = m_iHead; i < m_iTail; i++, index++) {
 				pNew[index] = m_pData[i];
 			}
-		} else {  //copy data in two phrases.
+		} else {  //copy data from two phrases.
 			for (i = m_iHead; i < m_iCapacity; i++, index++) {
 				pNew[index] = m_pData[i];
 			}
