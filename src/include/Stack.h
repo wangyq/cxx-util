@@ -13,14 +13,12 @@ class Stack {
 
 protected:
 	enum {
-		INIT_SIZE = 16,
-		INC_SIZE = 16,
-		ENUM_NULL
+		INIT_SIZE = 16, INC_SIZE = 16, ENUM_NULL
 	};
 	unsigned int m_iCapacity;
 	unsigned int m_iIncSize;  //every time the increment size.
 	unsigned int m_iCur;      //cur top of element.
-	T* m_pData ;
+	T* m_pData;
 public:
 	Stack();
 	Stack(unsigned int iInitialSize);
@@ -32,7 +30,7 @@ public:
 	bool isEmpty();
 	bool isFull();
 	T Pop();
-	bool Push(const T& );
+	bool Push(const T&);
 	T& Top();
 };
 
@@ -44,7 +42,7 @@ Stack<T>::Stack() {
 	m_iIncSize = INC_SIZE;
 	m_iCur = 0;
 	m_pData = new T[m_iCapacity];
-	if( m_pData == 0 ) {
+	if (m_pData == 0) {
 		m_iCapacity = 0;
 	}
 }
@@ -57,7 +55,7 @@ Stack<T>::Stack(unsigned int iInitialSize) {
 	m_iIncSize = INC_SIZE;
 	m_iCur = 0;
 	m_pData = new T[m_iCapacity];
-	if( m_pData == 0 ) {
+	if (m_pData == 0) {
 		m_iCapacity = 0;
 	}
 }
@@ -68,20 +66,20 @@ Stack<T>::Stack(unsigned int iInitialSize, int iIncSize) {
 	m_iIncSize = iIncSize;
 	m_iCur = 0;
 	m_pData = new T[m_iCapacity];
-	if( m_pData == 0 ) {
+	if (m_pData == 0) {
 		m_iCapacity = 0;
 	}
 }
 template<class T>
 Stack<T>::~Stack() {
 	// TODO Auto-generated destructor stub
-	delete  [] m_pData;
+	delete[] m_pData;
 }
 
 template<class T>
 unsigned int Stack<T>::Size() {
 	// TODO Auto-generated destructor stub
-	return m_iCur ;
+	return m_iCur;
 }
 
 template<class T>
@@ -100,30 +98,36 @@ bool Stack<T>::isFull() {
 template<class T>
 T& Stack<T>::Top() {
 	// TODO Auto-generated destructor stub
-	if( isEmpty() ) return 0;
-	return m_pData[m_iCur-1];
+	if (isEmpty())
+		return 0;
+	return m_pData[m_iCur - 1];
 }
 
 template<class T>
 T Stack<T>::Pop() {
 	// TODO Auto-generated destructor stub
-	if( isEmpty() ) return 0;
-	m_iCur --;
+	if (isEmpty())
+		return 0;
+	m_iCur--;
 	return m_pData[m_iCur];
 }
 
 template<class T>
 bool Stack<T>::Push(const T& ele) {
 	// TODO Auto-generated destructor stub
-	if( isFull() ) {
-		T* pNew = new T[m_iCapacity+m_iIncSize];
-		if( pNew == 0 ) return false;
-		for(unsigned int i=0;i<m_iCur;i++){//copy data
+	if (isFull()) {
+		T* pNew = new T[m_iCapacity + m_iIncSize];
+		if (pNew == 0)
+			return false;
+		for (unsigned int i = 0; i < m_iCur; i++) {	//copy data
 			pNew[i] = m_pData[i];
 		}
+		delete[] m_pData;
+		m_pData = pNew;  //
+
 		m_iCapacity += m_iIncSize;   //new capacity
 	}
-	m_pData[m_iCur ++] = ele;     //add element and pointer plus one.
+	m_pData[m_iCur++] = ele;     //add element and pointer plus one.
 	return true;
 }
 
