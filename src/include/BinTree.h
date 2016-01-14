@@ -92,79 +92,6 @@ protected:
                 break;  //finished!
             }
         } while (true);
-
-//#define VISIT_CUR_NODE_PREORDER(pNode,stack,pfunc)  \
-//		do{                                           \
-//		pfunc(pNode->data);                           \
-//		if (pNode->right != 0) {                      \
-//			stack.Push(pNode->right);                  \
-//		}                                                            \
-//		pNode = pNode->left;}while(0)
-//
-//		TreeNode* pNode = pRoot;
-//
-//		do {
-//			if (pNode != 0) {
-//				VISIT_CUR_NODE_PREORDER(pNode,st,pPrintFunc)
-//				;
-//			} else if (!st.isEmpty()) {
-//				pNode = st.Pop();
-//				VISIT_CUR_NODE_PREORDER(pNode,st,pPrintFunc)
-//				;
-//			} else {
-//				break;  //finished!
-//			}
-//		} while (true);
-
-//		do {
-//			if (pNode != 0) {
-//				pPrintFunc(pNode->data); //visit current node.
-//				if (pNode->right != 0) {
-//					st.Push(pNode->right);
-//				}
-//				pNode = pNode->left;  //next node.
-//			} else if (!st.isEmpty()) {
-//				pNode = st.Pop();
-//				pPrintFunc(pNode->data); //visit current node.
-//				if (pNode->right != 0) {
-//					st.Push(pNode->right);
-//				}
-//				pNode = pNode->left;  //next node.
-//			} else {
-//				break;
-//			}
-//
-//		} while (true);
-
-    }
-    void travelPreOrder_one(void (*pPrintFunc)(const T& val)) {
-        Stack<TreeNode*> st;
-
-        if (pRoot == 0)
-            return;
-        TreeNode* pNode = pRoot;
-
-        while (true) {
-
-            pPrintFunc(pNode->data); //visit current node.
-
-            if (pNode->left != 0) { //left node is not null!
-                if (pNode->right != 0) {
-                    st.Push(pNode->right);
-                }
-                pNode = pNode->left;  //next node.
-            } else if (pNode->right != 0) {
-                pNode = pNode->right;
-            } else { //left and right child is null. so visit it.
-
-                if (st.isEmpty()) {
-                    break;  //end
-                }
-                pNode = st.Pop();
-            } //end of if
-
-        }
-
     }
 
     void travelInOrder(void (*pPrintFunc)(const T& val)) {
@@ -184,46 +111,7 @@ protected:
             }
         } while (true);
     }
-    void travelInOrder_one(void (*pPrintFunc)(const T& val)) {
-        Stack<TreeNode*> st;
-        bool bFinished = false;
 
-        if (pRoot == 0)
-            return;
-        TreeNode* pNode = pRoot;
-
-        while (true) {
-            if (pNode->left != 0) { //left node is not null!
-                st.Push(pNode);  //current node push into stack
-                pNode = pNode->left;  //next node.
-            } else {
-                //visit this node.
-                pPrintFunc(pNode->data);
-
-                if (pNode->right != 0)
-                    pNode = pNode->right;
-                else {
-                    bFinished = true;
-                    while (!st.isEmpty()) {
-                        //
-                        pNode = st.Pop();
-                        pPrintFunc(pNode->data);
-                        if (pNode->right != 0) {
-                            pNode = pNode->right;
-                            bFinished = false;
-                            break;
-
-                        }
-                    }  //end of while
-                    if (bFinished)
-                        break;
-                }
-
-            }  //end of else
-
-        }
-
-    }
     void travelPostOrder(void (*pPrintFunc)(const T& val)) {
         Stack<TreeNode*> st;
 
@@ -246,44 +134,6 @@ protected:
                     break;     //end of all travel.
             }
         } while (true);
-    }
-    void travelPostOrder_one(void (*pPrintFunc)(const T& val)) {
-        Stack<TreeNode*> st;
-        bool bFinished = false;
-
-        if (pRoot == 0)
-            return;
-        TreeNode* pNode = pRoot;
-
-        while (true) {
-            if (pNode->left != 0) { //left node is not null!
-                st.Push(pNode);  //current node push into stack
-                pNode = pNode->left;  //next node.
-            } else if (pNode->right != 0) {
-                st.Push(pNode);  //current node push into stack
-                pNode = pNode->right;
-            } else { //left and right child is null. so visit it.
-                //visit this node.
-                pPrintFunc(pNode->data);
-
-                bFinished = true;
-                while (!st.isEmpty()) {
-                    if ((pNode == st.Top()->right) || (st.Top()->right == 0)) {
-                        //
-                        pNode = st.Pop();
-                        pPrintFunc(pNode->data);
-                    } else { //st.Top()->right is not null.
-                        pNode = st.Top()->right;
-                        bFinished = false;
-                        break;
-                    }
-                } //end of while
-                if (bFinished)
-                    break;
-            } //end of if
-
-        }
-
     }
     //====================================
 public:
