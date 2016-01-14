@@ -138,10 +138,9 @@ T ArrayQueue<T>::Dequeue() {
 
 	T& ele = m_pData[m_iHead];
 
-	if ((m_iHead + 1) == m_iCapacity) {
+	m_iHead++; //move next
+	if (m_iHead >= m_iCapacity) {
 		m_iHead = 0;
-	} else {
-		m_iHead++;
 	}
 	return ele;
 }
@@ -194,10 +193,10 @@ bool ArrayQueue<T>::EnQueue(const T& ele) {
 
 	} else {
 		m_pData[m_iTail] = ele;
-		if ((m_iTail + 1) == m_iCapacity)
+		m_iTail++;  //move to next.
+		if( m_iTail >= m_iCapacity ){
 			m_iTail = 0;
-		else
-			m_iTail++;
+		}
 	}
 
 	return true;
