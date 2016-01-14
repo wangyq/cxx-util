@@ -10,14 +10,11 @@
 #include "util.h"
 using namespace std;
 
-
-
-
-void module_run(){
+void module_run() {
 
 }
 
-void hello_world(){
-	cout<<"Hello, world!"<<endl;
+void hello_world() {
+    cout << "Hello, world!" << endl;
 }
 

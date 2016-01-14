@@ -12,127 +12,127 @@ template<class T>
 class Stack {
 
 protected:
-	enum {
-		INIT_SIZE = 16, INC_SIZE = 16, ENUM_NULL
-	};
-	unsigned int m_iCapacity;
-	unsigned int m_iIncSize;  //every time the increment size.
-	unsigned int m_iCur;      //cur top of element.
-	T* m_pData;
-	static T NulVal ;
+    enum {
+        INIT_SIZE = 16, INC_SIZE = 16, ENUM_NULL
+    };
+    unsigned int m_iCapacity;
+    unsigned int m_iIncSize;  //every time the increment size.
+    unsigned int m_iCur;      //cur top of element.
+    T* m_pData;
+    static T NulVal;
 
 public:
-	Stack();
-	Stack(unsigned int iInitialSize);
-	Stack(unsigned int iInitialSize, int iIncSize);
-	virtual ~Stack();
+    Stack();
+    Stack(unsigned int iInitialSize);
+    Stack(unsigned int iInitialSize, int iIncSize);
+    virtual ~Stack();
 
 public:
-	unsigned int Size();
-	bool isEmpty();
-	bool isFull();
-	T Pop();
-	bool Push(const T&);
-	T& Top();
+    unsigned int Size();
+    bool isEmpty();
+    bool isFull();
+    T Pop();
+    bool Push(const T&);
+    T& Top();
 };
 
-template<class T> T Stack<T>::NulVal = (T)0;
+template<class T> T Stack<T>::NulVal = (T) 0;
 
 template<class T>
 Stack<T>::Stack() {
-	// TODO Auto-generated constructor stub
-	//Stack<T>(INIT_SIZE,INC_SIZE);
-	m_iCapacity = INIT_SIZE;
-	m_iIncSize = INC_SIZE;
-	m_iCur = 0;
-	m_pData = new T[m_iCapacity];
-	if (m_pData == 0) {
-		m_iCapacity = 0;
-	}
+    // TODO Auto-generated constructor stub
+    //Stack<T>(INIT_SIZE,INC_SIZE);
+    m_iCapacity = INIT_SIZE;
+    m_iIncSize = INC_SIZE;
+    m_iCur = 0;
+    m_pData = new T[m_iCapacity];
+    if (m_pData == 0) {
+        m_iCapacity = 0;
+    }
 }
 
 template<class T>
 Stack<T>::Stack(unsigned int iInitialSize) {
-	// TODO Auto-generated constructor stub
-	//Stack<T>(iInitialSize,INC_SIZE);
-	m_iCapacity = iInitialSize;
-	m_iIncSize = INC_SIZE;
-	m_iCur = 0;
-	m_pData = new T[m_iCapacity];
-	if (m_pData == 0) {
-		m_iCapacity = 0;
-	}
+    // TODO Auto-generated constructor stub
+    //Stack<T>(iInitialSize,INC_SIZE);
+    m_iCapacity = iInitialSize;
+    m_iIncSize = INC_SIZE;
+    m_iCur = 0;
+    m_pData = new T[m_iCapacity];
+    if (m_pData == 0) {
+        m_iCapacity = 0;
+    }
 }
 template<class T>
 Stack<T>::Stack(unsigned int iInitialSize, int iIncSize) {
-	// TODO Auto-generated constructor stub
-	m_iCapacity = iInitialSize;
-	m_iIncSize = iIncSize;
-	m_iCur = 0;
-	m_pData = new T[m_iCapacity];
-	if (m_pData == 0) {
-		m_iCapacity = 0;
-	}
+    // TODO Auto-generated constructor stub
+    m_iCapacity = iInitialSize;
+    m_iIncSize = iIncSize;
+    m_iCur = 0;
+    m_pData = new T[m_iCapacity];
+    if (m_pData == 0) {
+        m_iCapacity = 0;
+    }
 }
 template<class T>
 Stack<T>::~Stack() {
-	// TODO Auto-generated destructor stub
-	delete[] m_pData;
+    // TODO Auto-generated destructor stub
+    delete[] m_pData;
 }
 
 template<class T>
 unsigned int Stack<T>::Size() {
-	// TODO Auto-generated destructor stub
-	return m_iCur;
+    // TODO Auto-generated destructor stub
+    return m_iCur;
 }
 
 template<class T>
 bool Stack<T>::isEmpty() {
-	// TODO Auto-generated destructor stub
-	return m_iCur == 0;
+    // TODO Auto-generated destructor stub
+    return m_iCur == 0;
 }
 
 template<class T>
 bool Stack<T>::isFull() {
-	// TODO Auto-generated destructor stub
-	return m_iCur >= m_iCapacity;
+    // TODO Auto-generated destructor stub
+    return m_iCur >= m_iCapacity;
 }
 
 //===================
 template<class T>
 T& Stack<T>::Top() {
-	// TODO Auto-generated destructor stub
-	if (isEmpty())
-		return NulVal;
-	return m_pData[m_iCur - 1];
+    // TODO Auto-generated destructor stub
+    if (isEmpty())
+        return NulVal;
+    return m_pData[m_iCur - 1];
 }
 
 template<class T>
 T Stack<T>::Pop() {
-	// TODO Auto-generated destructor stub
-	if (isEmpty())
-		return 0;
-	m_iCur--;
-	return m_pData[m_iCur];
+    // TODO Auto-generated destructor stub
+    if (isEmpty())
+        return 0;
+    m_iCur--;
+    return m_pData[m_iCur];
 }
 
 template<class T>
 bool Stack<T>::Push(const T& ele) {
-	// TODO Auto-generated destructor stub
-	if (isFull()) {
-		T* pNew = new T[m_iCapacity + m_iIncSize];
-		if (pNew == 0)
-			return false;
-		for (unsigned int i = 0; i < m_iCur; i++) {	//copy data
-			pNew[i] = m_pData[i];
-		}
-		delete[] m_pData;
-		m_pData = pNew;  //
+    // TODO Auto-generated destructor stub
+    if (isFull()) {
+        T* pNew = new T[m_iCapacity + m_iIncSize];
+        if (pNew == 0)
+            return false;
+        for (unsigned int i = 0; i < m_iCur; i++) {	//copy data
+            pNew[i] = m_pData[i];
+        }
+        delete[] m_pData;
+        m_pData = pNew;  //
 
-		m_iCapacity += m_iIncSize;   //new capacity
-	}
-	m_pData[m_iCur++] = ele;     //add element and pointer plus one.
-	return true;
+        m_iCapacity += m_iIncSize;   //new capacity
+    }
+    m_pData[m_iCur++] = ele;     //add element and pointer plus one.
+    return true;
 }
 
 #endif /* SRC_INCLUDE_STACK_H_ */

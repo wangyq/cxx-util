@@ -8,7 +8,7 @@
 #ifndef SRC_INCLUDE_FUNC_MAP_H_
 #define SRC_INCLUDE_FUNC_MAP_H_
 
-typedef void (*PFUNC_VAR)(...) ;
+typedef void (*PFUNC_VAR)(...);
 typedef void (*PFUNC_VOID)();
 
 #define BEGIN_FUNC_MAP() static void call_module_func_FUNC_MAP() {
@@ -28,7 +28,5 @@ typedef void (*PFUNC_VOID)();
 #define FUNC_ITEM4_IF(bRun,func,type1,arg1,type2,arg2,type3,arg3,type4,arg4) {extern void func(type1 ,type2 ,type3 ,type4 ); if(bRun) func((arg1),(arg2),(arg3),(arg4));}
 
 #define END_FUNC_MAP() }
-
-
 
 #endif /* SRC_INCLUDE_FUNC_MAP_H_ */

@@ -1,2 +1,1 @@
-
 bool is_bigendian();
