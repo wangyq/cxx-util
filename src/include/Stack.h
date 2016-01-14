@@ -55,7 +55,7 @@ template<class T>
 Stack<T>::Stack(unsigned int iInitialSize) {
     // TODO Auto-generated constructor stub
     //Stack<T>(iInitialSize,INC_SIZE);
-    m_iCapacity = iInitialSize;
+    m_iCapacity = iInitialSize>0? iInitialSize:INIT_SIZE;
     m_iIncSize = INC_SIZE;
     m_iCur = 0;
     m_pData = new T[m_iCapacity];
@@ -66,8 +66,8 @@ Stack<T>::Stack(unsigned int iInitialSize) {
 template<class T>
 Stack<T>::Stack(unsigned int iInitialSize, int iIncSize) {
     // TODO Auto-generated constructor stub
-    m_iCapacity = iInitialSize;
-    m_iIncSize = iIncSize;
+    m_iCapacity = iInitialSize>0? iInitialSize:INIT_SIZE;
+    m_iIncSize = iIncSize>0?iIncSize:INC_SIZE;
     m_iCur = 0;
     m_pData = new T[m_iCapacity];
     if (m_pData == 0) {
