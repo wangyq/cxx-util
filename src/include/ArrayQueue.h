@@ -20,6 +20,8 @@ protected:
 	unsigned int m_iHead; // header pointer of the position in which is the first element to be dequeue.
 	unsigned int m_iTail; // tail pointer of the position in which is the latest element to be enqueue.
 	T* m_pData;
+
+	bool IncCapacity(unsigned int incSize);
 public:
 	ArrayQueue();
 	ArrayQueue(unsigned int iInitialSize);
@@ -149,55 +151,55 @@ template<class T>
 bool ArrayQueue<T>::EnQueue(const T& ele) {
 	// TODO Auto-generated destructor stub
 	if (isFull()) {
-		T* pNew = new T[m_iCapacity + m_iIncSize];
-		if (pNew == 0)
+		if (!IncCapacity(0))
 			return false;
-//		for (unsigned int i = 0; i < Size(); i++) {  //copy data
-//			pNew[i] = m_pData[(i + m_iHead) % m_iCapacity];
-//		}
-		unsigned int i = 0;
-		unsigned int index = 0;
-
-		if (m_iHead <= m_iTail) {  //Just copy data.
-			for (i = m_iHead; i < m_iTail; i++, index++) {
-				pNew[index] = m_pData[i];
-			}
-		} else {  //copy data from two phrases.
-			for (i = m_iHead; i < m_iCapacity; i++, index++) {
-				pNew[index] = m_pData[i];
-			}
-			for (i = 0; i < m_iTail; i++, index++) { //here m_iTail == m_iCapacity-1 ?
-				pNew[index] = m_pData[i];
-			}
-		} //end of resize
-
-//		if (m_iHead > 0) { //here m_iTail must NOT be m_iCapacity-1.
-//			for (i = m_iHead; i < m_iCapacity; i++, index++) {
-//				pNew[index] = m_pData[i];
-//			}
-//		}
-//		for (i = 0; i < m_iTail; i++, index++) { //here m_iTail == m_iCapacity-1 ?
-//			pNew[index] = m_pData[i];
-//		} //end of resize
-
-		//enqueue now.
-		pNew[index] = ele;
-
-		delete[] m_pData;
-		m_pData = pNew;
-
-		m_iHead = 0;          //new head.
-		m_iTail = m_iCapacity; //new tail
-
-		m_iCapacity += m_iIncSize;   //new capacity
-
-	} else {
-		m_pData[m_iTail] = ele;
-		m_iTail++;  //move to next.
-		if( m_iTail >= m_iCapacity ){
-			m_iTail = 0;
-		}
 	}
+
+	m_pData[m_iTail] = ele;
+	m_iTail++;  //move to next.
+	if (m_iTail >= m_iCapacity) {
+		m_iTail = 0;
+	}
+
+	return true;
+}
+
+template<class T>
+bool ArrayQueue<T>::IncCapacity(unsigned int incSize) {
+
+	int curSize = Size(); //current size to store.
+
+	if (incSize <= 0) {
+		incSize = m_iIncSize;  //default inc size.
+	}
+	unsigned int iNewCapacity = m_iCapacity + incSize;
+	T* pNew = new T[iNewCapacity];
+	if (pNew == 0)
+		return false;
+
+	unsigned int i = 0;
+	unsigned int index = 0;
+
+	if (m_iHead <= m_iTail) {  //Just copy data.
+		for (i = m_iHead; i < m_iTail; i++, index++) {
+			pNew[index] = m_pData[i];
+		}
+	} else {  //copy data from two phrases.
+		for (i = m_iHead; i < m_iCapacity; i++, index++) {
+			pNew[index] = m_pData[i];
+		}
+		for (i = 0; i < m_iTail; i++, index++) { //here m_iTail == m_iCapacity-1 ?
+			pNew[index] = m_pData[i];
+		}
+	} //end of resize
+
+	//free memory!
+	delete [] m_pData;
+	m_pData = pNew;
+
+	m_iHead = 0;
+	m_iTail = curSize;
+	m_iCapacity = iNewCapacity;
 
 	return true;
 }
