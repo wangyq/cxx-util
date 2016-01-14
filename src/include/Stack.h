@@ -19,6 +19,8 @@ protected:
 	unsigned int m_iIncSize;  //every time the increment size.
 	unsigned int m_iCur;      //cur top of element.
 	T* m_pData;
+	static T NulVal ;
+
 public:
 	Stack();
 	Stack(unsigned int iInitialSize);
@@ -33,6 +35,8 @@ public:
 	bool Push(const T&);
 	T& Top();
 };
+
+template<class T> T Stack<T>::NulVal = (T)0;
 
 template<class T>
 Stack<T>::Stack() {
@@ -99,7 +103,7 @@ template<class T>
 T& Stack<T>::Top() {
 	// TODO Auto-generated destructor stub
 	if (isEmpty())
-		return 0;
+		return NulVal;
 	return m_pData[m_iCur - 1];
 }
 

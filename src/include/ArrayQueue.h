@@ -15,6 +15,9 @@ protected:
 	enum {
 		INIT_SIZE = 16, INC_SIZE = 16, ENUM_NULL
 	};
+
+	static T NulVal ;
+
 	unsigned int m_iCapacity;
 	unsigned int m_iIncSize;  //every time the increment size.
 	unsigned int m_iHead; // header pointer of the position in which is the first element to be dequeue.
@@ -37,6 +40,8 @@ public:
 	T& Head();
 	T& Tail();
 };
+
+template<class T> T ArrayQueue<T>::NulVal = (T)0;
 
 template<class T>
 ArrayQueue<T>::ArrayQueue() {
@@ -114,7 +119,7 @@ template<class T>
 T& ArrayQueue<T>::Head() {
 	// TODO Auto-generated destructor stub
 	if (isEmpty())
-		return 0;
+		return NulVal;
 	return m_pData[m_iHead];
 }
 
@@ -125,7 +130,7 @@ template<class T>
 T& ArrayQueue<T>::Tail() {
 	// TODO Auto-generated destructor stub
 	if (isEmpty())
-		return 0;
+		return NulVal;
 	if (m_iTail == 0) {
 		return m_pData[m_iCapacity - 1];
 	}
