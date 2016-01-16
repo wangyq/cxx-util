@@ -34,8 +34,7 @@ protected:
         delete pNode;
     }
 
-    TreeNode* createPreOrderInternal(T* val, int len, int& index,
-            const T& nulVal) {
+    TreeNode* createPreOrderInternal(T* val, int len, int& index, const T& nulVal) {
         TreeNode* pNode = 0;
 
         if (index < len) {
@@ -52,24 +51,21 @@ protected:
         return pNode;
     }
 
-    void printInOrderInternal(TreeNode* pNode,
-            void (*pPrintFunc)(const T& val)) {
+    void printInOrderInternal(TreeNode* pNode, void (*pPrintFunc)(const T& val)) {
         if (pNode != 0) {  //not null
             printInOrderInternal(pNode->left, pPrintFunc);
             pPrintFunc(pNode->data);
             printInOrderInternal(pNode->right, pPrintFunc);
         }
     }
-    void printPreOrderInternal(TreeNode* pNode,
-            void (*pPrintFunc)(const T& val)) {
+    void printPreOrderInternal(TreeNode* pNode, void (*pPrintFunc)(const T& val)) {
         if (pNode != 0) {  //not null
             pPrintFunc(pNode->data);
             printPreOrderInternal(pNode->left, pPrintFunc);
             printPreOrderInternal(pNode->right, pPrintFunc);
         }
     }
-    void printPostOrderInternal(TreeNode* pNode,
-            void (*pPrintFunc)(const T& val)) {
+    void printPostOrderInternal(TreeNode* pNode, void (*pPrintFunc)(const T& val)) {
         if (pNode != 0) {  //not null
             printPostOrderInternal(pNode->left, pPrintFunc);
             printPostOrderInternal(pNode->right, pPrintFunc);
@@ -93,7 +89,7 @@ protected:
 //            }
 //        } while (true);
 
-        if (pRoot == 0){
+        if (pRoot == 0) {
             return;
         }
         TreeNode* pNode = pRoot;
@@ -136,25 +132,53 @@ protected:
     void travelPostOrder(void (*pPrintFunc)(const T& val)) {
         Stack<TreeNode*> st;
 
+//        TreeNode* pNode = pRoot;
+//        do {
+//            if (pNode != 0) {
+//                st.Push(pNode);
+//                pNode = pNode->left;
+//            } else {  //pNode == 0
+//                while (!st.isEmpty()) {
+//                    if (st.Top()->right == pNode) { //equal 0 or last visited node.
+//                        pNode = st.Pop();
+//                        pPrintFunc(pNode->data);
+//                    } else {
+//                        pNode = st.Top()->right;
+//                        break;
+//                    }
+//                }  //end of while.
+//                if (st.isEmpty()){
+//                    break;     //end of all travel.
+//                }
+//            }
+//        } while (true);
+
+        if (pRoot == 0)
+            return;
         TreeNode* pNode = pRoot;
-        do {
-            if (pNode != 0) {
+        do {  //make sure pNode must not be null.
+            if (pNode->left != 0) {
                 st.Push(pNode);
                 pNode = pNode->left;
-            } else {  //pNode == 0
+            } else if (pNode->right != 0) {  // pNode->left is null
+                st.Push(pNode);
+                pNode = pNode->right;
+            } else { // left and right of pNode is null.
+
+                pPrintFunc(pNode->data); //visit current node
                 while (!st.isEmpty()) {
-                    if (st.Top()->right == pNode) { //equal 0 or last visited node.
+                    if ((st.Top()->right == pNode) || (st.Top()->right == 0)) { //equal 0 or last visited node.
                         pNode = st.Pop();
                         pPrintFunc(pNode->data);
-                    } else {
-                        pNode = st.Top()->right;
+                    } else { //
+                        pNode = st.Top()->right;  // Here must not be null.
                         break;
                     }
-                }  //end of while.
-                if (st.isEmpty()){
+                } //end of while
+                if (st.isEmpty()) { // All is finished!
                     break;     //end of all travel.
                 }
-            }
+            }     //end of else!
         } while (true);
     }
     //====================================
