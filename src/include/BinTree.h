@@ -79,19 +79,40 @@ protected:
     void travelPreOrder(void (*pPrintFunc)(const T& val)) {
         Stack<TreeNode*> st;
 
-        TreeNode* pNode = pRoot;
+//        TreeNode* pNode = pRoot;
 
+//        do {
+//            if (pNode != 0) {
+//                pPrintFunc(pNode->data); //visit current node.
+//                st.Push(pNode->right);
+//                pNode = pNode->left;  //next node.
+//            } else if (!st.isEmpty()) {
+//                pNode = st.Pop();
+//            } else {
+//                break;  //finished!
+//            }
+//        } while (true);
+
+        if (pRoot == 0){
+            return;
+        }
+        TreeNode* pNode = pRoot;
         do {
-            if (pNode != 0) {
-                pPrintFunc(pNode->data); //visit current node.
-                st.Push(pNode->right);
-                pNode = pNode->left;  //next node.
-            } else if (!st.isEmpty()) {
+            pPrintFunc(pNode->data); //visit current node.
+            if (pNode->left != 0) {
+                if (pNode->right != 0) {
+                    st.Push(pNode->right);
+                }
+                pNode = pNode->left;
+            } else if (pNode->right != 0) { //pNode->left must be null
+                pNode = pNode->right;
+            } else if (!st.isEmpty()) { // the left and right of pNode must be null
                 pNode = st.Pop();
             } else {
-                break;  //finished!
+                break;
             }
         } while (true);
+
     }
 
     void travelInOrder(void (*pPrintFunc)(const T& val)) {
@@ -130,8 +151,9 @@ protected:
                         break;
                     }
                 }  //end of while.
-                if (st.isEmpty())
+                if (st.isEmpty()){
                     break;     //end of all travel.
+                }
             }
         } while (true);
     }
