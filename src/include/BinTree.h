@@ -212,6 +212,8 @@ public:
 
         travelPostOrder(pPrintFunc);
     }
+    //
+
 };
 
 #endif /* SRC_INCLUDE_BINTREE_H_ */

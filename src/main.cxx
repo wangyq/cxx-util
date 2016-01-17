@@ -6,7 +6,8 @@ using namespace std;
 
 //call every module's start function here!
 BEGIN_FUNC_MAP()
-    FUNC_ITEM_IF(true, hello_world)END_FUNC_MAP()
+    FUNC_ITEM_IF(true, module_run)
+END_FUNC_MAP()
 
 static void init() {
     // call function map
