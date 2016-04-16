@@ -2,7 +2,7 @@
 
 //call every module's start function here!
 BEGIN_FUNC_MAP()
-    FUNC_ITEM_IF(true, test_run)END_FUNC_MAP()
+    RUN_FUNC_IF(true, test_run)END_FUNC_MAP()
 
 static void init() {
     // call function map

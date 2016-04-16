@@ -21,7 +21,7 @@ typedef void (*PFUNC_VOID)();
 #define FUNC_ITEM4(func,type1,arg1,type2,arg2,type3,arg3,type4,arg4) {extern void func(type1 ,type2 ,type3 ,type4 ); func((arg1),(arg2),(arg3),(arg4));}
 
 //whether call the function!
-#define FUNC_ITEM_IF(bRun,func) {extern void func(); if(bRun) func();}
+#define RUN_FUNC_IF(bRun,func) {extern void func(); if(bRun) func();}
 #define FUNC_ITEM1_IF(bRun,func,type1,arg1) {extern void func(type1 ); if(bRun) func((arg1));}
 #define FUNC_ITEM2_IF(bRun,func,type1,arg1,type2,arg2) {extern void func(type1 ,type2 ); if(bRun) func((arg1),(arg2));}
 #define FUNC_ITEM3_IF(bRun,func,type1,arg1,type2,arg2,type3,arg3) {extern void func(type1 ,type2 ,type3 ); if(bRun) func((arg1),(arg2),(arg3));}
